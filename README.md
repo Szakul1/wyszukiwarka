@@ -1,0 +1,1 @@
+Tu kiedys cos bedzie
