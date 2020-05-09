@@ -11,11 +11,6 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}"
 
-    {% if title %}
-       <title>Django Blog - {{ title }}</title>
-    {% else %}
-        <title>Django Blog</title>
-    {% endif %}
 </head>
 <body>
     <header class="site-header">
@@ -28,6 +23,8 @@
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
+              <a class="nav-item nav-link" href="{% url 'blog-universities' %}">Universities</a>
+              <a class="nav-item nav-link" href="{% url 'blog-courses' %}">Courses</a>
               <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
             </div>
             <!-- Navbar Right Side -->

@@ -1,0 +1,14 @@
+{% extends "blog/pagination.html" %}
+{% block content2 %}
+	{% for course in courses %}
+			<article class="media content-section">
+				<div class="media-body">
+					<div class="article-metadata">
+						<small class="text-muted">{{ course.date_posted|date:"d F, Y" }}</small>
+					</div>
+					<h2><a class="article-title" href="{% url 'course-detail' course.id %}">{{ course.name }}</a> - {{ course.university }}</h2>
+					<p class="article-description">{{ course.description }}</p>
+				</div>
+			</article>
+	{% endfor %}
+{% endblock content2 %}

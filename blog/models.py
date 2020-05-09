@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 class Post(models.Model):
@@ -10,9 +11,38 @@ class Post(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    
+
     def __str__(self):
         return self.title
-    
+
+    def get_absolute_url(self):
+        return reverse('post-detail', kwargs={'pk': self.pk})
+
+
+class University(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+    location = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('post-detail', kwargs={'pk': self.pk})
+
+
+class Course(models.Model):
+    name = models.CharField(max_length=100)
+    university = models.ForeignKey(University, on_delete=models.CASCADE)
+    date_posted = models.DateTimeField(default=timezone.now)
+    description = models.TextField()
+    grade = models.IntegerField()
+    semesters = models.IntegerField()
+    department = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
