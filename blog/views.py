@@ -9,6 +9,7 @@ from django.views.generic import (
     DeleteView
 )
 from .models import Post, University, Course
+from blog.graphs.testgraph import create_graph
 
 
 def home(request):
@@ -42,6 +43,11 @@ class CourseListView(ListView):
 
 class CourseDetailView(DetailView):
     model = Course
+
+    def get_context_data(self, **kwargs):
+        create_graph(self.get_object())
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 class PostListView(ListView):

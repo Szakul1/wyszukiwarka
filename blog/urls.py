@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.urls import path
+from django.urls import path, include
 from . import views
 from .views import (
     UniversityListView,
@@ -13,6 +13,7 @@ from .views import (
     PostUpdateView,
     PostDeleteView
 )
+
 
 urlpatterns = [
     path('', PostListView.as_view(), name='blog-home'),
@@ -28,4 +29,6 @@ urlpatterns = [
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('about/', views.about, name='blog-about'),
+
+    path('django_plotly_dash/', include('django_plotly_dash.urls')),
 ]
