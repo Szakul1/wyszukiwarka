@@ -9,7 +9,8 @@ def create_graph(object_):
     app = DjangoDash('SimpleExample')
     plot_div = {
         'data': [
-            {'x': [object_.id], 'y': [object_.semesters], 'type': 'bar', 'name': 'cos'},
+            {'x': [object_.id], 'y': [object_.semesters], 'type': 'bar',
+             'name': 'cos'},
         ],
         'layout': {
             'title': 'tescik',
@@ -22,3 +23,14 @@ def create_graph(object_):
         }
     }
     app.layout = html.Div(dcc.Graph(figure=plot_div))
+
+# figure = go.Figure(go.Indicator(
+#     title='cos',
+#     mode='gauge+number+delta',
+#     delta={'reference': 100},
+#     value=10,
+#     number={'suffix': "%"},
+#     gauge={'shape': 'bullet',
+#            'bar': {'thickness': 1},
+#            'axis': {'range': [0, 100]}}
+# ))

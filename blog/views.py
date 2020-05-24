@@ -9,7 +9,9 @@ from django.views.generic import (
     DeleteView
 )
 from .models import Post, University, Course
-from blog.graphs.testgraph import create_graph
+from blog.components.testgraph import create_graph
+from blog.components.proggresBar import create_progress
+from blog.components.button import create_checkbox, is_created
 
 
 def home(request):
@@ -19,6 +21,11 @@ def home(request):
         'courses': Course.objects.all()
     }
     return render(request, 'blog/home.html', context)
+
+
+def comparison(request):
+    is_created()
+    return render(request, 'blog/comparison.html', None)
 
 
 class UniversityListView(ListView):
@@ -40,12 +47,19 @@ class CourseListView(ListView):
     ordering = ['name']
     paginate_by = 2
 
+    def get_context_data(self, *args, object_list=None, **kwargs):
+        objects = self.get_queryset().all()
+        create_checkbox(objects)
+        context = super().get_context_data(**kwargs)
+        return context
+
 
 class CourseDetailView(DetailView):
     model = Course
 
     def get_context_data(self, **kwargs):
-        create_graph(self.get_object())
+        # create_graph(self.get_object())
+        create_progress()
         context = super().get_context_data(**kwargs)
         return context
 

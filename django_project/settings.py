@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_plotly_dash.apps.DjangoPlotlyDashConfig'
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    'dpd_static_support',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +51,23 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'django_plotly_dash.middleware.ExternalRedirectionMiddleware',
+]
+
+PLOTLY_COMPONENTS = [
+    # Common components
+    'dash_core_components',
+    'dash_html_components',
+    'dash_renderer',
+
+    # django-plotly-dash components
+    'dpd_components',
+    # static support if serving local assets
+    'dpd_static_support',
+
+    # Other components, as needed
+    'dash_bootstrap_components',
 ]
 
 ROOT_URLCONF = 'django_project.urls'
@@ -129,3 +148,15 @@ LOGIN_REDIRECT_URL = 'blog-home'
 LOGIN_URL = 'login'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+STATICFILES_FINDERS = [
+
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+
+    'django_plotly_dash.finders.DashAssetFinder',
+    'django_plotly_dash.finders.DashComponentFinder',
+    'django_plotly_dash.finders.DashAppDirectoryFinder',
+]
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)

@@ -11,16 +11,18 @@
                 {#    				</div>#}
                 {#				{% endif %}#}
             </div>
-            <h2 class="article-title">{{ object.name }} - {{ course.university }}</h2>
+            <h2 class="article-title">{{ object.name }}
+                - {{ course.university }}</h2>
             <p class="article-content"> Wydzial {{ object.department }}</p>
             <p class="article-content"> Stopien {{ object.grade }}</p>
-            <p class="article-content"> Ilosc semestrow {{ object.semesters }}</p>
+            <p class="article-content"> Ilosc
+                semestrow {{ object.semesters }}</p>
 
             <p class="article-content">{{ object.description }}</p>
         </div>
+
     </article>
     {% load plotly_dash %}
-    <div class="{% plotly_class name="SimpleExample" %} card" style="height: 100%; width: 100%">
-        {% plotly_app name="SimpleExample" ratio=0.65 %}
-    </div>
+    {% plotly_app name="Progress" ratio=0.2 %}
+
 {% endblock content %}
