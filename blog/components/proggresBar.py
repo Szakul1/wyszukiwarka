@@ -6,6 +6,7 @@ from dash.dependencies import Input, Output
 
 
 def create(name, value, app):
+    """Tworzy dany pasek postepu"""
     progress = html.Div(
         [
             dbc.Label(name),
@@ -22,12 +23,14 @@ def create(name, value, app):
         [Input(name + "-interval", "n_intervals")],
     )
     def update_progress(n):
+        """Uaktualnia pasek postepu tworzac animacje ladowania"""
         return n, f"{n} %"
 
     return progress
 
 
 def create_progress():
+    """Tworzy paski postepu w ustawieniu 2x2"""
     app = DjangoDash("Progress", add_bootstrap_links=True)
     row = html.Div([
         dbc.Row([

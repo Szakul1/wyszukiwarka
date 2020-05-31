@@ -1,14 +1,26 @@
 {% extends "blog/pagination.html" %}
 {% block content2 %}
-	{% for university in universities %}
-			<article class="media content-section">
-				<div class="media-body">
-					<div class="article-metadata">
-						<small class="text-muted">{{ university.date_posted|date:"d F, Y" }}</small>
-					</div>
-					<h2><a class="article-title" href="{% url 'university-detail' university.id %}">{{ university.name }}</a></h2>
-					<p class="article-description">{{ university.description }}</p>
-				</div>
-			</article>
-	{% endfor %}
+    {% load plotly_dash %}
+    {% plotly_app name="Button" ratio=0.05 %}
+    <a href="comparison"> Sprawdz porownanie </a>
+    {% plotly_app name="Checkall" ratio=0.025 %}
+    {% for university in universities %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <small class="text-muted">{{ university.date_posted|date:"d F, Y" }}</small>
+                </div>
+                <h2>
+                    {% with university.id|stringformat:"s" as id %}
+                        {% with "Check"|add:id as check_id %}
+                            {% plotly_app name=check_id ratio=0.025 %}
+                        {% endwith %}
+                    {% endwith %}
+                    <a class="article-title"
+                       href="{% url 'university-detail' university.id %}">{{ university.name }}</a>
+                </h2>
+                <p class="article-description">{{ university.description }}</p>
+            </div>
+        </article>
+    {% endfor %}
 {% endblock content2 %}

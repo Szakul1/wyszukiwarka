@@ -9,8 +9,8 @@ from django.views.generic import (
     DeleteView
 )
 from .models import Post, University, Course
-from blog.components.testgraph import create_graph
 from blog.components.proggresBar import create_progress
+from blog.components.universityGraph import create_graphs_universities
 from blog.components.button import create_checkbox, is_created
 
 
@@ -35,9 +35,21 @@ class UniversityListView(ListView):
     ordering = ['name']
     paginate_by = 2
 
+    def get_context_data(self, *args, object_list=None, **kwargs):
+        objects = self.get_queryset().all()
+        create_checkbox(objects)
+        context = super().get_context_data(**kwargs)
+        return context
+
 
 class UniversityDetailView(DetailView):
     model = University
+
+    def get_context_data(self, **kwargs):
+        create_graphs_universities(self.get_object())
+        create_progress()
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 class CourseListView(ListView):

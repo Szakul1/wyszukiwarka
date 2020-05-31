@@ -4,21 +4,22 @@ from django_plotly_dash import DjangoDash
 
 
 def create_comparison(objects):
+    """Tworzy wkyres porownan dla danych obiektow"""
     app = DjangoDash('Comparison')
     print(objects)
     plot_div = {
         'data': [
             {'x': [i.name for i in objects],
-             'y': [i.semesters for i in objects],
+             'y': [i.id for i in objects],
              'type': 'bar'},
         ],
         'layout': {
-            'title': 'porownanie',
+            'title': 'Porownanie',
             'xaxis': {
                 'title': 'nazwa'
             },
             'yaxis': {
-                'title': 'semestr'
+                'title': 'id'
             }
         }
     }
