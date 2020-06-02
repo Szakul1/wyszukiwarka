@@ -20,6 +20,11 @@ from users import views as user_views
 from django.conf import settings
 from django.conf.urls.static import static
 
+from search import views as search_views
+
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
@@ -39,6 +44,9 @@ urlpatterns = [
          auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),
          name='password_reset_complete'),
     path('', include('blog.urls')),
+    path('search/autocomplete/', search_views.auto_complete, name='auto_complete'),
+    path('search/', search_views.search, name='search'),
+    path('searchs/', search_views.PostListView.as_view(), name='postlist'),    
 ]
 
 if settings.DEBUG:
