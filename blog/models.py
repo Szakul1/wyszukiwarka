@@ -31,3 +31,27 @@ class University(models.Model):
     type_1 = models.CharField(max_length=100, choices=types)
     national_ranking = models.IntegerField()
     website_url = models.URLField()
+    
+class Course(models.Model):
+    
+    types = [(1, 'stacjonarne'),
+             (2, 'niestacjonarne')]
+    
+    types1 = [(1, 'licencjat'),
+              (2, 'inzynier'),
+              (3, 'magister')]
+    
+    name = models.CharField(max_length=100)
+    university = models.ForeignKey(University, on_delete=models.CASCADE)
+    date_posted = models.DateTimeField(default=timezone.now)
+    description = models.TextField()
+    type_1 = models.CharField(max_length=100, choices=types)
+    type_2 = models.CharField(max_length=100, choices=types1) 
+    grade = models.IntegerField()
+    semesters = models.IntegerField()
+    department = models.CharField(max_length=100)
+    m_to_w_ratio = models.IntegerField()
+    international_ratio = models.IntegerField()
+    would_choose_again = models.IntegerField()
+    avg_salary = models.IntegerField()
+    
