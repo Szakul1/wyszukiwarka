@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import django_filters
 
-from blog.models import Post
+from blog.models import Course, University
 
-class PostFilter(django_filters.FilterSet):
+class CourseFilter(django_filters.FilterSet):
     
     CHOICES = (
             ('ascending', 'Ascending'),
@@ -13,8 +13,8 @@ class PostFilter(django_filters.FilterSet):
     ordering = django_filters.ChoiceFilter(label='Ordering', choices=CHOICES, method='filter_by_order')
     
     class Meta:
-        model = Post
-        fields = {'title'}
+        model = Course
+        fields = {'name', 'university', 'type_1', 'type_2'}
         
     def filter_by_order(self, queryset, name, value):
         expression = 'pub_date' if value == 'ascending' else '-pub_date'
