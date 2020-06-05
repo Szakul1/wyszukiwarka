@@ -46,7 +46,7 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('search/autocomplete/', search_views.auto_complete, name='auto_complete'),
     path('search/', search_views.search, name='search'),
-    path('searchs/', search_views.PostListView.as_view(), name='postlist'),    
+    path('searchs/', search_views.CourseListView.as_view(), name='postlist'),    
 ]
 
 if settings.DEBUG:
