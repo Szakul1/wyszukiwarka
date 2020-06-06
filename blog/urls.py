@@ -12,9 +12,9 @@ from .views import (
 urlpatterns = [
     path('', ulotka, name='blog-home'),
 
-    path('univerisities', UniversityListView.as_view(),
+    path('universities', UniversityListView.as_view(),
          name='blog-universities'),
-    path('univerisities/<int:pk>', UniversityDetailView.as_view(),
+    path('universities/<int:pk>', UniversityDetailView.as_view(),
          name='university-detail'),
     path('courses', CourseListView.as_view(), name='blog-courses'),
     path('courses/<int:pk>', CourseDetailView.as_view(), name='course-detail'),
