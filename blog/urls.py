@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from django.urls import path
+from django.urls import path, include
 from . import views
+from blog.components import proggresBar
 from .views import (
     UniversityListView,
     UniversityDetailView,
@@ -11,14 +12,17 @@ from .views import (
     PostDetailView,
     PostCreateView,
     PostUpdateView,
-    PostDeleteView
+    PostDeleteView,
+    comparison,
 )
 
 urlpatterns = [
     path('', PostListView.as_view(), name='blog-home'),
 
-    path('univerisities', UniversityListView.as_view(), name='blog-universities'),
-    path('univerisities/<int:pk>', UniversityDetailView.as_view(), name='university-detail'),
+    path('univerisities', UniversityListView.as_view(),
+         name='blog-universities'),
+    path('univerisities/<int:pk>', UniversityDetailView.as_view(),
+         name='university-detail'),
     path('courses', CourseListView.as_view(), name='blog-courses'),
     path('courses/<int:pk>', CourseDetailView.as_view(), name='course-detail'),
 
@@ -28,4 +32,7 @@ urlpatterns = [
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('about/', views.about, name='blog-about'),
+
+    path('comparison', comparison, name='blog-comparison'),
+    path('django_plotly_dash/', include('django_plotly_dash.urls')),
 ]

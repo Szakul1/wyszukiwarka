@@ -1,14 +1,17 @@
 {% extends "blog/pagination.html" %}
 {% block content2 %}
-	{% for university in universities %}
-			<article class="media content-section">
-				<div class="media-body">
-					<div class="article-metadata">
-						<small class="text-muted">{{ university.date_posted|date:"d F, Y" }}</small>
-					</div>
-					<h2><a class="article-title" href="{% url 'university-detail' university.id %}">{{ university.name }}</a></h2>
-					<p class="article-description">{{ university.description }}</p>
-				</div>
-			</article>
-	{% endfor %}
+    {% for university in universities %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <small class="text-muted">{{ university.date_posted|date:"d F, Y" }}</small>
+                </div>
+                <h2>
+                    <a class="article-title"
+                       href="{% url 'university-detail' university.id %}">{{ university.name }}</a>
+                </h2>
+                <p class="article-description">{{ university.description }}</p>
+            </div>
+        </article>
+    {% endfor %}
 {% endblock content2 %}

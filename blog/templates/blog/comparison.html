@@ -1,0 +1,5 @@
+{% extends "blog/base.html" %}
+{% block content %}
+    {% load plotly_dash %}
+    {% plotly_app name="Comparison" ratio=10 %}
+{% endblock content %}
