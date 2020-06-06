@@ -15,10 +15,19 @@
             </p>
         </div>
     </article>
-    <p>Lista kursow:</p>
+    <h2 class="article-title"> Lista kursow:</h2>
     {% for course in object.course_set.all %}
-        <a href="{% url 'course-detail' course.id %}">
-            {{ course.name|linebreaks }}
-        </a>
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <small class="text-muted">{{ course.date_posted|date:"d F, Y" }}</small>
+                </div>
+                <h2>
+                    <a class="article-title"
+                       href="{% url 'course-detail' course.id %}">{{ course.name }}</a>
+                </h2>
+                <p class="article-description">{{ course.description }}</p>
+            </div>
+        </article>
     {% endfor %}
 {% endblock content %}
