@@ -7,16 +7,27 @@
             
             <button type="submit" class="btn btn-primary">Search</button>
     </form>
+    {% load plotly_dash %}
+    {% plotly_app name="Button" ratio=0.05 %}
+    <a href="comparison"> Sprawdz porownanie </a>
+    {% plotly_app name="Checkall" ratio=0.025 %}
 	{% for post in filter.qs %}
 			<article class="media content-section">
 				<div class="media-body">
 					<div class="article-metadata">
 						<a class="mr-2" href="#">{{ post.uniwersytet }}</a>
-						<small class="text-muted">{{ post.department }}</small>
 						<small class="text-muted">{{ post.tryb }}</small>
 						<small class="text-muted">{{ post.tytul }}</small>
+						<small class="text-muted">{{ post.date_posted|date:"d F, Y" }}</small>
 					</div>
-					<h2><a class="article-title" href="{% url 'course-detail' post.id %}">{{ post.nazwa }}</a></h2>
+					<h2>
+					{% with post.id|stringformat:"s" as id %}
+                        {% with "Check"|add:id as check_id %}
+                            {% plotly_app name=check_id ratio=0.025 %}
+                        {% endwith %}
+                    {% endwith %}
+					<a class="article-title" href="{% url 'course-detail' post.id %}">{{ post.nazwa }}</a>
+					</h2>
 					<p class="article-content">{{ post.description }}</p>
 				</div>
 			</article>
