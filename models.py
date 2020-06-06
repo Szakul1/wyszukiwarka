@@ -20,11 +20,11 @@ class Post(models.Model):
     
 class University(models.Model):
     
-    types = (('politechnika', 'Politechnika'),
-             ('uniwersytet ogolny', 'Uniwersytet Ogólny'),
-             ('uniwersytet medyczny', 'Uniwersytet Medyczny'),
-             ('uniwersytet ekonomiczny', 'Uniwersytet Ekonomiczny'),
-             ('uniwersytet przyrodniczy', 'Uniwersytet Przyrodniczy'))
+    types = [(1, 'Politechnika'),
+             (2, 'Uniwersytet Ogólny'),
+             (3, 'Uniwersytet Medyczny'),
+             (4, 'Uniwersytet Ekonomiczny'),
+             (5, 'Uniwersytet Przyrodniczy')]
     
     name = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
@@ -37,12 +37,12 @@ class University(models.Model):
     
 class Course(models.Model):
     
-    types = (('stacjonarne', 'Stacjonarne'),
-             ('niestacjonarne', 'Niestacjonarne'))
+    types = [(1, 'stacjonarne'),
+             (2, 'niestacjonarne')]
     
-    types1 = (('licencjat', 'Licencjat'),
-              ('inzynier', 'Inzynier'),
-              ('magister', 'Magister'))
+    types1 = [(1, 'licencjat'),
+              (2, 'inzynier'),
+              (3, 'magister')]
     
     name = models.CharField(max_length=100)
     university = models.ForeignKey(University, on_delete=models.CASCADE)
