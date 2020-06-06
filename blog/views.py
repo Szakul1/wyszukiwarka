@@ -4,7 +4,7 @@ from django.views.generic import (
     DetailView,
 )
 from .models import University, Course
-from blog.components.proggresBar import create_progress
+from blog.components.progressBar import create_progress
 from blog.components.courseGraph import create_graph
 from blog.components.button import create_checkbox, is_created
 

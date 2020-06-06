@@ -26,11 +26,11 @@ def create_graph(x, y, title, y_name):
 def create_comparison(objects):
     """Tworzy wkyres porownan dla danych obiektow"""
     app = DjangoDash('Comparison')
-    names = [i.name for i in objects]
+    names = [i.name + '(' + i.type_1 + ')' for i in objects]
     app.layout = html.Div([
         dcc.Graph(figure=create_graph(names, [i.m_to_w_ratio for i in objects],
                                       'Wspolczynnik mezczyzn do kobiet',
-                                      'Wpolczynnik')),
+                                      'Wspolczynnik')),
         dcc.Graph(
             figure=create_graph(names, [i.international_ratio for i in objects],
                                 'Wspolczynnik obcokrajowcow',
