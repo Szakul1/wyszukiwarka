@@ -13,15 +13,15 @@ class University(models.Model):
              ('uniwersytet ekonomiczny', 'Uniwersytet Ekonomiczny'),
              ('uniwersytet przyrodniczy', 'Uniwersytet Przyrodniczy'))
 
-    name = models.CharField(max_length=100)
+    nazwa = models.CharField(max_length=100)
+    lokacja = models.CharField(max_length=100)
     date_posted = models.DateTimeField(default=timezone.now)
-    location = models.CharField(max_length=100)
-    type_1 = models.CharField(max_length=100, choices=types)
+    typ = models.CharField(max_length=100, choices=types)
     national_ranking = models.IntegerField()
     website_url = models.URLField()
 
     def __str__(self):
-        return self.name
+        return self.nazwa
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
@@ -35,12 +35,12 @@ class Course(models.Model):
               ('inzynier', 'Inzynier'),
               ('magister', 'Magister'))
 
-    name = models.CharField(max_length=100)
-    university = models.ForeignKey(University, on_delete=models.CASCADE)
+    nazwa = models.CharField(max_length=100)
+    uniwersytet = models.ForeignKey(University, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(default=timezone.now)
     description = models.TextField()
-    type_1 = models.CharField(max_length=100, choices=types)
-    type_2 = models.CharField(max_length=100, choices=types1)
+    tryb = models.CharField(max_length=100, choices=types)
+    tytul = models.CharField(max_length=100, choices=types1)
     grade = models.IntegerField()
     semesters = models.IntegerField()
     department = models.CharField(max_length=100)
@@ -48,10 +48,10 @@ class Course(models.Model):
     international_ratio = models.IntegerField(default=55)
     would_choose_again = models.IntegerField(default=55)
     avg_salary = models.IntegerField(default=55)
-    function = models.IntegerField()
+    function = models.IntegerField(default=55)
 
     def __str__(self):
-        return self.name
+        return self.nazwa
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})

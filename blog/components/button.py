@@ -26,7 +26,7 @@ def create_checkbox(objects):
     app = DjangoDash('Button', add_bootstrap_links=True)
 
     app.layout = html.Div([
-        dbc.Button("Porownaj", id='button', color='primary', size="lg",
+        dbc.Button("Porownaj", id='button', color='primary', size="sg",
                    className="mr-1"),
         html.Div(id='hidden')
     ])
@@ -46,7 +46,7 @@ def create_checkbox(objects):
 
     checked_id = []
     called = [False for _ in range(len(objects_id) + 1)]
-    for i in range(1, len(objects_id) + 1):
+    for i in objects_id:
         app = DjangoDash('Check' + str(i), add_bootstrap_links=True)
         checkbox = dbc.Checklist(
             options=[

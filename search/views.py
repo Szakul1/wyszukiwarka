@@ -4,8 +4,6 @@ import json
 from django.http import HttpResponse
 from django.views.generic import ListView
 
-from .filters import CourseFilter
-
 
 # from .documents import PostDocument
 # Create your views here.
@@ -27,6 +25,6 @@ class CourseListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['filter'] = CourseFilter(self.request.GET,
-                                         queryset=self.get_queryset())
+        # context['filter'] = CourseFilter(self.request.GET,
+        #                                  queryset=self.get_queryset())
         return context

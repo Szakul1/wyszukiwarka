@@ -1,14 +1,27 @@
-{% extends "blog/pagination.html" %}
-{% block content2 %}
-    {% load plotly_dash %}
-    {% plotly_app name="Button" ratio=0.05 %}
-    <a href="comparison"> Sprawdz porownanie </a>
-    {% plotly_app name="Checkall" ratio=0.025 %}
-    {% for course in courses %}
+{% extends "blog/base.html" %}
+{% load bootstrap %}
+{% block content %}
+    <form method="GET">
+        {{ filter.form|bootstrap }}
+        <button type="submit" class="btn btn-primary">Wyszukaj</button>
+    </form>
+    <div><p></p></div>
+    <div class="container-fluid">
+
+        {% load plotly_dash %}
+        {% plotly_app name="Button" ratio=0.05 %}
+        <a href="comparison"> Sprawdz porownanie </a>
+        {% plotly_app name="Checkall" ratio=0.025 %}
+    </div>
+    {% for course in filter.qs %}
         <article class="media content-section">
             <div class="media-body">
                 <div class="article-metadata">
-                    <small class="text-muted">{{ course.date_posted|date:"d F, Y" }}</small>
+                    <a class="mr-2"
+                       href="{% url 'university-detail' course.uniwersytet.id %}"
+                    >{{ course.uniwersytet.nazwa }}</a>
+                    <small class="
+                       text-muted">{{ course.date_posted|date:"d F, Y" }}</small>
                 </div>
                 <h2>
                     {% with course.id|stringformat:"s" as id %}
@@ -17,10 +30,10 @@
                         {% endwith %}
                     {% endwith %}
                     <a class="article-title"
-                       href="{% url 'course-detail' course.id %}">{{ course.name }}</a>
-                    - {{ course.university }}</h2>
+                       href="{% url 'course-detail' course.id %}">{{ course.nazwa }}</a>
+                </h2>
                 <p class="article-description">{{ course.description }}</p>
             </div>
         </article>
     {% endfor %}
-{% endblock content2 %}
+{% endblock content %}

@@ -7,6 +7,7 @@ from .models import University, Course
 from blog.components.progressBar import create_progress
 from blog.components.courseGraph import create_graph
 from blog.components.button import create_checkbox, is_created
+from .filters import CourseFilter, UniversityFilter
 
 
 def ulotka(request):
@@ -30,8 +31,14 @@ class UniversityListView(ListView):
     model = University
     template_name = 'blog/university.html'
     context_object_name = 'universities'
-    ordering = ['name']
+    ordering = ['nazwa']
     paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = UniversityFilter(self.request.GET,
+                                             queryset=self.get_queryset())
+        return context
 
 
 class UniversityDetailView(DetailView):
@@ -42,13 +49,15 @@ class CourseListView(ListView):
     model = Course
     template_name = 'blog/course.html'
     context_object_name = 'courses'
-    ordering = ['name']
+    ordering = ['nazwa']
     paginate_by = 10
 
     def get_context_data(self, *args, object_list=None, **kwargs):
         objects = self.get_queryset().all()
         create_checkbox(objects)
         context = super().get_context_data(**kwargs)
+        context['filter'] = CourseFilter(self.request.GET,
+                                         queryset=self.get_queryset())
         return context
 
 

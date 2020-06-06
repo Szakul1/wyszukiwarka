@@ -5,9 +5,9 @@
             <div class="article-metadata">
                 <small class="text-muted">{{ object.date_posted|date:"d F, Y" }}</small>
             </div>
-            <h2 class="article-title">{{ object.name }}</h2>
-            <p class="article-content"> Typ: {{ object.type_1 }}</p>
-            <p class="article-content"> Lokacja: {{ object.location }}</p>
+            <h2 class="article-title">{{ object.nazwa }}</h2>
+            <p class="article-content"> Typ: {{ object.typ }}</p>
+            <p class="article-content"> Lokacja: {{ object.lokacja }}</p>
             <p class="article-content"
             > Miejsce w rankingu narodowym: {{ object.national_ranking }}</p>
             <p class="article-content"> Strona uniwersytetu: <a
@@ -24,7 +24,7 @@
                 </div>
                 <h2>
                     <a class="article-title"
-                       href="{% url 'course-detail' course.id %}">{{ course.name }}</a>
+                       href="{% url 'course-detail' course.id %}">{{ course.nazwa }}</a>
                 </h2>
                 <p class="article-description">{{ course.description }}</p>
             </div>

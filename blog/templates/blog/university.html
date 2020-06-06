@@ -1,17 +1,22 @@
-{% extends "blog/pagination.html" %}
-{% block content2 %}
-    {% for university in universities %}
+{% extends "blog/base.html" %}
+{% load bootstrap %}
+{% block content %}
+    <form method="GET">
+        {{ filter.form|bootstrap }}
+        <button type="submit" class="btn btn-primary">Wyszukaj</button>
+    </form>
+    {% for university in filter.qs %}
         <article class="media content-section">
             <div class="media-body">
                 <div class="article-metadata">
+                    <small class="text-muted">{{ university.lokacja }},</small>
+                    <small class="text-muted">{{ university.typ }}</small>
                     <small class="text-muted">{{ university.date_posted|date:"d F, Y" }}</small>
                 </div>
-                <h2>
-                    <a class="article-title"
-                       href="{% url 'university-detail' university.id %}">{{ university.name }}</a>
+                <h2><a class="article-title"
+                       href="{% url 'university-detail' university.id %}">{{ university.nazwa }}</a>
                 </h2>
-                <p class="article-description">{{ university.description }}</p>
             </div>
         </article>
     {% endfor %}
-{% endblock content2 %}
+{% endblock content %}
