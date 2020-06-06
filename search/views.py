@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.views.generic import ListView
 
 from .filters import CourseFilter, UniversityFilter
+from .components.button import create_checkbox, is_created
 
 #from .documents import PostDocument
 # Create your views here.
@@ -22,6 +23,8 @@ class UniversityListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = UniversityFilter(self.request.GET, queryset=self.get_queryset())
+        objects = self.get_queryset().all()
+        create_checkbox(objects)
         return context
 
     
