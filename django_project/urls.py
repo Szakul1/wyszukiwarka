@@ -20,7 +20,6 @@ from users import views as user_views
 from django.conf import settings
 from django.conf.urls.static import static
 
-from search import views as search_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -49,8 +48,6 @@ urlpatterns = [
              template_name='users/password_reset_complete.html'),
          name='password_reset_complete'),
     path('', include('blog.urls')),
-    path('search/', search_views.search, name='search'),
-    path('searchs/', search_views.CourseListView.as_view(), name='postlist'),
 ]
 
 if settings.DEBUG:
