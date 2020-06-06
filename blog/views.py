@@ -1,22 +1,17 @@
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.models import User
+from django.shortcuts import render
 from django.views.generic import (
-        ListView,
-        DetailView,
-        CreateView,
-        UpdateView,
-        DeleteView
+    ListView,
+    DetailView,
 )
-from .models import Post, University, Course
+from .models import University, Course
 from blog.components.proggresBar import create_progress
 from blog.components.courseGraph import create_graph
 from blog.components.button import create_checkbox, is_created
 
 
 def ulotka(request):
-    
     return render(request, 'blog/ulotka.html')
+
 
 def home(request):
     context = {
@@ -25,7 +20,13 @@ def home(request):
     }
     return render(request, 'blog/home.html', context)
 
- class UniversityListView(ListView):
+
+def comparison(request):
+    is_created()
+    return render(request, 'blog/comparison.html', None)
+
+
+class UniversityListView(ListView):
     model = University
     template_name = 'blog/university.html'
     context_object_name = 'universities'
@@ -59,5 +60,3 @@ class CourseDetailView(DetailView):
         create_progress(self.get_object())
         context = super().get_context_data(**kwargs)
         return context
-
-      
