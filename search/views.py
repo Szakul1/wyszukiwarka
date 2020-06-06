@@ -23,8 +23,6 @@ class UniversityListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = UniversityFilter(self.request.GET, queryset=self.get_queryset())
-        objects = self.get_queryset().all()
-        create_checkbox(objects)
         return context
 
     
@@ -36,4 +34,6 @@ class CourseListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = CourseFilter(self.request.GET, queryset=self.get_queryset())
+        objects = self.get_queryset().all()
+        create_checkbox(objects)
         return context
