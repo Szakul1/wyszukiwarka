@@ -10,7 +10,7 @@ from django.views.generic import (
 )
 from .models import Post, University, Course
 from blog.components.proggresBar import create_progress
-from blog.components.universityGraph import create_graphs_universities
+from blog.components.courseGraph import create_graph
 from blog.components.button import create_checkbox, is_created
 
 
@@ -33,23 +33,11 @@ class UniversityListView(ListView):
     template_name = 'blog/university.html'
     context_object_name = 'universities'
     ordering = ['name']
-    paginate_by = 2
-
-    def get_context_data(self, *args, object_list=None, **kwargs):
-        objects = self.get_queryset().all()
-        create_checkbox(objects)
-        context = super().get_context_data(**kwargs)
-        return context
+    paginate_by = 10
 
 
 class UniversityDetailView(DetailView):
     model = University
-
-    def get_context_data(self, **kwargs):
-        create_graphs_universities(self.get_object())
-        create_progress()
-        context = super().get_context_data(**kwargs)
-        return context
 
 
 class CourseListView(ListView):
@@ -57,7 +45,7 @@ class CourseListView(ListView):
     template_name = 'blog/course.html'
     context_object_name = 'courses'
     ordering = ['name']
-    paginate_by = 2
+    paginate_by = 10
 
     def get_context_data(self, *args, object_list=None, **kwargs):
         objects = self.get_queryset().all()
@@ -70,8 +58,8 @@ class CourseDetailView(DetailView):
     model = Course
 
     def get_context_data(self, **kwargs):
-        # create_graph(self.get_object())
-        create_progress()
+        create_graph(self.get_object())
+        create_progress(self.get_object())
         context = super().get_context_data(**kwargs)
         return context
 
@@ -88,7 +76,7 @@ class UserPostListView(ListView):
     model = Post
     template_name = 'blog/user_posts.html'
     context_object_name = 'posts'
-    paginate_by = 2
+    paginate_by = 10
 
     def get_query_set(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))

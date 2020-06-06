@@ -26,7 +26,7 @@ def create_checkbox(objects):
     app = DjangoDash('Button', add_bootstrap_links=True)
 
     app.layout = html.Div([
-        dbc.Button("Prownaj", id='button', color='primary', size="lg",
+        dbc.Button("Porownaj", id='button', color='primary', size="lg",
                    className="mr-1"),
         html.Div(id='hidden')
     ])
@@ -41,7 +41,6 @@ def create_checkbox(objects):
         """Podczas klikniecia tworzy wykres do porownan miedzy obiektami"""
         global created
         if n:
-            print(checked_id)
             created = True
             create_comparison([i for i in objects if str(i.id) in checked_id])
 

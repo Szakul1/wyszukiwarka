@@ -5,8 +5,11 @@ import dash_core_components as dcc
 from dash.dependencies import Input, Output
 
 
-def create(name, value, app):
+def create(name, value, app, salary=False):
     """Tworzy dany pasek postepu"""
+    if salary:  # jesli salary to skaluje z 10k i zamieniam na procenty
+        value = salary / 100
+        print(value, salary)
     progress = html.Div(
         [
             dbc.Label(name),
@@ -24,22 +27,30 @@ def create(name, value, app):
     )
     def update_progress(n):
         """Uaktualnia pasek postepu tworzac animacje ladowania"""
+        if salary:
+            return n, f'{salary} zl'
         return n, f"{n} %"
 
     return progress
 
 
-def create_progress():
+def create_progress(course):
     """Tworzy paski postepu w ustawieniu 2x2"""
     app = DjangoDash("Progress", add_bootstrap_links=True)
     row = html.Div([
         dbc.Row([
-            dbc.Col(create('first', 10, app)),
-            dbc.Col(create('second', 20, app))
+            dbc.Col(
+                create('Wspolczynnik mezczyzn do kobiet', course.m_to_w_ratio,
+                       app)),
+            dbc.Col(
+                create('Wpolczynnik obcokrajowosci', course.international_ratio,
+                       app))
         ]),
         dbc.Row([
-            dbc.Col(create('third', 30, app)),
-            dbc.Col(create('fourth', 40, app))
+            dbc.Col(create('Odsetek osob ktore wybraly by ponownie',
+                           course.would_choose_again, app)),
+            dbc.Col(create('Srednia placa po studiach', course.avg_salary, app,
+                           course.avg_salary))
         ]),
     ], style={'width': '98%'})
     app.layout = row

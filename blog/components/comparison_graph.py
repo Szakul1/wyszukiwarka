@@ -3,24 +3,43 @@ import dash_html_components as html
 from django_plotly_dash import DjangoDash
 
 
-def create_comparison(objects):
-    """Tworzy wkyres porownan dla danych obiektow"""
-    app = DjangoDash('Comparison')
-    print(objects)
+def create_graph(x, y, title, y_name):
     plot_div = {
         'data': [
-            {'x': [i.name for i in objects],
-             'y': [i.id for i in objects],
+            {'x': x,
+             'y': y,
              'type': 'bar'},
         ],
         'layout': {
-            'title': 'Porownanie',
+            'title': title,
             'xaxis': {
                 'title': 'nazwa'
             },
             'yaxis': {
-                'title': 'id'
-            }
+                'title': y_name
+            },
         }
     }
-    app.layout = html.Div(dcc.Graph(figure=plot_div))
+    return plot_div
+
+
+def create_comparison(objects):
+    """Tworzy wkyres porownan dla danych obiektow"""
+    app = DjangoDash('Comparison')
+    names = [i.name for i in objects]
+    app.layout = html.Div([
+        dcc.Graph(figure=create_graph(names, [i.m_to_w_ratio for i in objects],
+                                      'Wspolczynnik mezczyzn do kobiet',
+                                      'Wpolczynnik')),
+        dcc.Graph(
+            figure=create_graph(names, [i.international_ratio for i in objects],
+                                'Wspolczynnik obcokrajowcow',
+                                'Wpolczynnik')),
+        dcc.Graph(
+            figure=create_graph(names, [i.would_choose_again for i in objects],
+                                'Odsetek osob, ktore wybraly by ponownie',
+                                'Odsetek')),
+        dcc.Graph(figure=create_graph(names, [i.avg_salary for i in objects],
+                                      'Srednia placa po studiach',
+                                      'Placa'))
+    ])
