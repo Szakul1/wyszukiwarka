@@ -20,11 +20,11 @@ class Post(models.Model):
     
 class University(models.Model):
     
-    types = [(1, 'Politechnika'),
-             (2, 'Uniwersytet Ogólny'),
-             (3, 'Uniwersytet Medyczny'),
-             (4, 'Uniwersytet Ekonomiczny'),
-             (5, 'Uniwersytet Przyrodniczy')]
+    types = (('politechnika', 'Politechnika'),
+             ('uniwersytet ogolny', 'Uniwersytet Ogólny'),
+             ('uniwersytet medyczny', 'Uniwersytet Medyczny'),
+             ('uniwersytet ekonomiczny', 'Uniwersytet Ekonomiczny'),
+             ('uniwersytet przyrodniczy', 'Uniwersytet Przyrodniczy'))
     
     name = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
@@ -32,14 +32,17 @@ class University(models.Model):
     national_ranking = models.IntegerField()
     website_url = models.URLField()
     
+    def __str__(self):
+        return self.name
+    
 class Course(models.Model):
     
-    types = [(1, 'stacjonarne'),
-             (2, 'niestacjonarne')]
+    types = (('stacjonarne', 'Stacjonarne'),
+             ('niestacjonarne', 'Niestacjonarne'))
     
-    types1 = [(1, 'licencjat'),
-              (2, 'inzynier'),
-              (3, 'magister')]
+    types1 = (('licencjat', 'Licencjat'),
+              ('inzynier', 'Inzynier'),
+              ('magister', 'Magister'))
     
     name = models.CharField(max_length=100)
     university = models.ForeignKey(University, on_delete=models.CASCADE)
@@ -50,8 +53,8 @@ class Course(models.Model):
     grade = models.IntegerField()
     semesters = models.IntegerField()
     department = models.CharField(max_length=100)
-    m_to_w_ratio = models.IntegerField()
-    international_ratio = models.IntegerField()
-    would_choose_again = models.IntegerField()
-    avg_salary = models.IntegerField()
+    m_to_w_ratio = models.IntegerField(default=55)
+    international_ratio = models.IntegerField(default=55)
+    would_choose_again = models.IntegerField(default=55)
+    avg_salary = models.IntegerField(default=55)
     
