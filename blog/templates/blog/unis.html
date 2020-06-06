@@ -13,6 +13,7 @@
 					<div class="article-metadata">
 						<a class="mr-2" href="#">{{ post.lokacja }}</a>
 						<small class="text-muted">{{ post.typ }}</small>
+						<small class="text-muted">{{ post.date_posted|date:"d F, Y" }}</small>
 					</div>
 					<h2><a class="article-title" href="{% url 'university-detail' post.id %}">{{ post.nazwa }}</a></h2>
 				</div>
