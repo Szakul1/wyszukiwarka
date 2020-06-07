@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
+
+"""Formularze dla przyszlej mozliwej implementacji"""
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
     
