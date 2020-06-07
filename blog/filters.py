@@ -4,8 +4,8 @@ from django import forms
 from django_filters import ChoiceFilter
 from blog.models import Course, University
 
-"""Fiter uzywany przy wyszukiwaniu modelu"""
 class CourseFilter(django_filters.FilterSet):
+    """Fiter uzywany przy wyszukiwaniu modelu"""
     CHOICES = (
         ('ascending', 'Ascending'),
         ('descending', 'Descending')
@@ -23,15 +23,16 @@ class CourseFilter(django_filters.FilterSet):
         expression = 'pub_date' if value == 'ascending' else '-pub_date'
         return queryset.order_by(expression)
 
-"""Fiter uzywany przy wyszukiwaniu modelu"""
 class UniversityFilter(django_filters.FilterSet):
-    """mozliwe opcje przy filtrowaniu wzgledem kolejnosci"""
+    """Fiter uzywany przy wyszukiwaniu modelu"""
+
+    #mozliwe opcje przy filtrowaniu wzgledem kolejnosci
     CHOICES = (
         ('rosnaco', 'Rosnaco'),
         ('malejaco', 'Malejaco')
     )
 
-    """pole obrazujace kolejnosc wzgledem miejsca w rankingu"""
+    #pole obrazujace kolejnosc wzgledem miejsca w rankingu
     ordering = django_filters.ChoiceFilter(label='Ranking', choices=CHOICES,
                                            method='filter_by_order')
 

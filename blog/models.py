@@ -3,9 +3,6 @@ from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth.models import User
 
-
-# Create your models here.
-
 class University(models.Model):
     """Model z bazy danych dla uniwersytetu"""
     types = (('politechnika', 'Politechnika'),
@@ -24,7 +21,7 @@ class University(models.Model):
     def __str__(self):
         return self.nazwa
 
-    """Odnosnik do szczegolowego widoku dla danego obiektu"""
+    #Odnosnik do szczegolowego widoku dla danego obiektu
     def get_absolute_url(self):
         return reverse('university-detail', kwargs={'pk': self.pk})
 
@@ -56,6 +53,6 @@ class Course(models.Model):
     def __str__(self):
         return self.nazwa
 
-    """Odnosnik do szczegolowego widoku dla danego obiektu"""
+    #Odnosnik do szczegolowego widoku dla danego obiektu
     def get_absolute_url(self):
         return reverse('course-detail', kwargs={'pk': self.pk})
