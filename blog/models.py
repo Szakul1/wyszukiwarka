@@ -24,7 +24,7 @@ class University(models.Model):
         return self.nazwa
 
     def get_absolute_url(self):
-        return reverse('post-detail', kwargs={'pk': self.pk})
+        return reverse('university-detail', kwargs={'pk': self.pk})
 
 
 class Course(models.Model):
@@ -54,4 +54,4 @@ class Course(models.Model):
         return self.nazwa
 
     def get_absolute_url(self):
-        return reverse('post-detail', kwargs={'pk': self.pk})
+        return reverse('course-detail', kwargs={'pk': self.pk})
