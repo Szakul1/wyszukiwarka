@@ -4,9 +4,8 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 
-# Create your models here.
-
 class University(models.Model):
+    """Model z bazy danych dla uniwersytetu"""
     types = (('politechnika', 'Politechnika'),
              ('uniwersytet ogolny', 'Uniwersytet Ogólny'),
              ('uniwersytet medyczny', 'Uniwersytet Medyczny'),
@@ -28,6 +27,7 @@ class University(models.Model):
 
 
 class Course(models.Model):
+    """Model z bazy danych dla kierunku"""
     types = (('stacjonarne', 'Stacjonarne'),
              ('niestacjonarne', 'Niestacjonarne'))
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+"""Tablica ze sciezkami w projekcie"""
 from django.urls import path, include
 from .views import (
     UniversityListView,

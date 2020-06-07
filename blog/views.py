@@ -1,22 +1,16 @@
-from django.shortcuts import render
-from django.views.generic import (
-    ListView,
-    DetailView,
-)
 from .models import University, Course
 from blog.components.progressBar import create_progress
 from blog.components.courseGraph import create_graph
 from blog.components.button import create_checkbox, is_created
 from .filters import CourseFilter, UniversityFilter
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.models import User
 from django.views.generic import (
-        ListView,
-        DetailView,
-        CreateView,
-        UpdateView,
-        DeleteView
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
 )
 
 
@@ -33,11 +27,13 @@ def home(request):
 
 
 def comparison(request):
+    """Zwraca widok dla wykresu z porownaniami"""
     is_created()
     return render(request, 'blog/comparison.html', None)
 
 
 class UniversityListView(ListView):
+    """Widok dla listy uniwersytetow"""
     model = University
     template_name = 'blog/university.html'
     context_object_name = 'universities'
@@ -45,6 +41,8 @@ class UniversityListView(ListView):
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
+        """Zwraca kontekst przy wywolywaniu template'a
+        Filtruje wedlug wyszukiwarki"""
         context = super().get_context_data(**kwargs)
         context['filter'] = UniversityFilter(self.request.GET,
                                              queryset=self.get_queryset())
@@ -52,10 +50,12 @@ class UniversityListView(ListView):
 
 
 class UniversityDetailView(DetailView):
+    """Widok dla uniwersytetu"""
     model = University
 
 
 class CourseListView(ListView):
+    """Widok dla listy kursow"""
     model = Course
     template_name = 'blog/course.html'
     context_object_name = 'courses'
@@ -63,6 +63,9 @@ class CourseListView(ListView):
     paginate_by = 10
 
     def get_context_data(self, *args, object_list=None, **kwargs):
+        """Zwraca kontekst przy wywolywaniu template'a
+        Tworzy checkboxy dla kierunkow
+        Filtruje wedlug wyszukiwarki"""
         objects = self.get_queryset().all()
         create_checkbox(objects)
         context = super().get_context_data(**kwargs)
@@ -72,9 +75,13 @@ class CourseListView(ListView):
 
 
 class CourseDetailView(DetailView):
+    """Widok dla kursu"""
     model = Course
 
     def get_context_data(self, **kwargs):
+        """Zwraca kontekst przy wywolywaniu template'a
+        Tworzy wykres i paski postepu
+        """
         create_graph(self.get_object())
         create_progress(self.get_object())
         context = super().get_context_data(**kwargs)
@@ -105,7 +112,6 @@ class CourseUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return super().form_valid(form)
 
     def test_func(self):
-        post = self.get_object()
         return True
 
 
@@ -114,8 +120,8 @@ class CourseDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = '/'
 
     def test_func(self):
-        course = self.get_object()
         return True
+
 
 class UniversityCreateView(LoginRequiredMixin, CreateView):
     model = University
@@ -137,7 +143,6 @@ class UniversityUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return super().form_valid(form)
 
     def test_func(self):
-        post = self.get_object()
         return True
 
 
@@ -146,5 +151,4 @@ class UniversityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = '/'
 
     def test_func(self):
-        course = self.get_object()
         return True

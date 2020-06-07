@@ -9,7 +9,6 @@ def create(name, value, app, salary=False):
     """Tworzy dany pasek postepu"""
     if salary:  # jesli salary to skaluje z 10k i zamieniam na procenty
         value = salary / 100
-        print(value, salary)
     progress = html.Div(
         [
             dbc.Label(name),

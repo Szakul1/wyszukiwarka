@@ -4,6 +4,7 @@ from django_plotly_dash import DjangoDash
 
 
 def create_graph(x, y, title, y_name):
+    """Tworzy wykres dla danych"""
     plot_div = {
         'data': [
             {'x': x,

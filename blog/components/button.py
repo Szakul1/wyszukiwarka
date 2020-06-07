@@ -21,7 +21,6 @@ def create_checkbox(objects):
     oraz zaznacz wszystkie.
     """
     objects_id = [i.id for i in objects]
-    print(objects_id)
 
     app = DjangoDash('Button', add_bootstrap_links=True)
 
