@@ -6,6 +6,12 @@
                 <a class="mr-2"
                        href="{% url 'university-detail' course.uniwersytet.id %}"
                     >{{ course.uniwersytet.nazwa }}</a>
+                {% if user.is_authenticated %}
+                    				<div>
+                        				<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'course-update' object.id %}">Update</a>
+                        				<a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'course-delete' object.id %}">Delete</a>
+                   				</div>
+                {% endif %}
                 <small class="text-muted">{{ object.date_posted|date:"d F, Y" }}</small>
             </div>
             <h2 class="article-title">{{ object.nazwa }}</h2>

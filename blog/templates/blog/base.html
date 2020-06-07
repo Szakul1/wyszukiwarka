@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}"
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
 
 </head>
 <body>
@@ -28,12 +28,11 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
               {% if user.is_authenticated %}
-                  <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
-                  <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-                  <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                  <a class="nav-item nav-link" href="{% url 'course-create' %}">Dodaj kierunek</a>
+                  <a class="nav-item nav-link" href="{% url 'university-create' %}">Dodaj uniwersytet</a>
+                  <a class="nav-item nav-link" href="{% url 'logout' %}">Wyloguj</a>
               {% else %}
-                  <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-                  <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                  <a class="nav-item nav-link" href="{% url 'login' %}">Zaloguj</a>
               {% endif %}
             </div>
           </div>
