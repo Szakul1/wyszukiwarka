@@ -15,15 +15,10 @@ from django.views.generic import (
 
 
 def ulotka(request):
+    """Widok startowy"""
     return render(request, 'blog/ulotka.html')
 
 
-def home(request):
-    context = {
-        'universities': University.objects.all(),
-        'courses': Course.objects.all()
-    }
-    return render(request, 'blog/home.html', context)
 
 
 def comparison(request):
@@ -55,7 +50,7 @@ class UniversityDetailView(DetailView):
 
 
 class CourseListView(ListView):
-    """Widok dla listy kursow"""
+    """Widok dla listy kierunkow"""
     model = Course
     template_name = 'blog/course.html'
     context_object_name = 'courses'
@@ -75,7 +70,7 @@ class CourseListView(ListView):
 
 
 class CourseDetailView(DetailView):
-    """Widok dla kursu"""
+    """Widok dla kierunku"""
     model = Course
 
     def get_context_data(self, **kwargs):
@@ -89,6 +84,7 @@ class CourseDetailView(DetailView):
 
 
 class CourseCreateView(LoginRequiredMixin, CreateView):
+    """Widok dla tworzenia kierunku"""
     model = Course
     fields = ['nazwa', 'uniwersytet', 'description',
               'tryb', 'tytul', 'grade', 'semesters',
@@ -101,6 +97,7 @@ class CourseCreateView(LoginRequiredMixin, CreateView):
 
 
 class CourseUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """Widok dla zmieniania kierunku"""
     model = Course
     fields = ['nazwa', 'uniwersytet', 'description',
               'tryb', 'tytul', 'grade', 'semesters',
@@ -116,6 +113,7 @@ class CourseUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 class CourseDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    """Widok dla usuwania kierunku"""
     model = Course
     success_url = '/'
 
@@ -124,6 +122,7 @@ class CourseDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 class UniversityCreateView(LoginRequiredMixin, CreateView):
+    """Widok dla tworzenia uniwersytetu"""
     model = University
     fields = ['nazwa', 'lokacja', 'typ',
               'national_ranking', 'website_url']
@@ -134,6 +133,7 @@ class UniversityCreateView(LoginRequiredMixin, CreateView):
 
 
 class UniversityUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """Widok dla zmieniania uniwersytetu"""
     model = University
     fields = ['nazwa', 'lokacja', 'typ',
               'national_ranking', 'website_url']
@@ -147,6 +147,7 @@ class UniversityUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 class UniversityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    """Widok dla usuwania uniwersytetu"""
     model = University
     success_url = '/'
 
