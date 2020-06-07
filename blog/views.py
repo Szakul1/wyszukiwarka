@@ -19,8 +19,6 @@ def ulotka(request):
     return render(request, 'blog/ulotka.html')
 
 
-
-
 def comparison(request):
     """Zwraca widok dla wykresu z porownaniami"""
     is_created()

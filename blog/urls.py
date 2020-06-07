@@ -31,10 +31,15 @@ urlpatterns = [
     path('django_plotly_dash/', include('django_plotly_dash.urls')),
 
     path('courses/new/', CourseCreateView.as_view(), name='course-create'),
-    path('courses/<int:pk>/update/', CourseUpdateView.as_view(), name='course-update'),
-    path('courses/<int:pk>/delete/', CourseDeleteView.as_view(), name='course-delete'),
+    path('courses/<int:pk>/update/', CourseUpdateView.as_view(),
+         name='course-update'),
+    path('courses/<int:pk>/delete/', CourseDeleteView.as_view(),
+         name='course-delete'),
 
-    path('universities/new/', UniversityCreateView.as_view(), name='university-create'),
-    path('universities/<int:pk>/update/', UniversityUpdateView.as_view(), name='university-update'),
-    path('universities/<int:pk>/delete/', UniversityDeleteView.as_view(), name='university-delete'),
+    path('universities/new/', UniversityCreateView.as_view(),
+         name='university-create'),
+    path('universities/<int:pk>/update/', UniversityUpdateView.as_view(),
+         name='university-update'),
+    path('universities/<int:pk>/delete/', UniversityDeleteView.as_view(),
+         name='university-delete'),
 ]
