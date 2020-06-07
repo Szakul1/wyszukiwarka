@@ -4,8 +4,9 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
 
-"""Formularze dla przyszlej mozliwej implementacji"""
+
 class UserRegisterForm(UserCreationForm):
+    """Formularz dla uzytkownika w przyszlej mozliwej implementacji"""
     email = forms.EmailField()
     
     class Meta:
@@ -13,6 +14,7 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
         
 class UserUpdateForm(forms.ModelForm):
+    """Formularz dla uzytkownika w przyszlej mozliwej implementacji"""
     email = forms.EmailField()
     
     class Meta:
@@ -20,6 +22,7 @@ class UserUpdateForm(forms.ModelForm):
         fields = ['username', 'email']
 
 class ProfileUpdateForm(forms.ModelForm):
+    """Formularz dla profilu w przyszlej mozliwej implementacji"""
     
     class Meta:
         model = Profile

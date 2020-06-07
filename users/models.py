@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 from PIL import Image
 
 
-"""Dodatkowa mozliwa w przyszlosci implementacja modelu profilu dla kazdego uzytkownika"""
 class Profile(models.Model):
+    """Dodatkowa mozliwa w przyszlosci implementacja modelu profilu dla kazdego uzytkownika"""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
